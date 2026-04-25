@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services | HouseAgent</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <!-- style.css removed: all styles are self-contained below -->
+    <style>
+      /* ── FOOTER (was in style.css) ── */
+      .footer-section { background-color: #020617; }
+      .footer-section a.text-white { opacity: 0.75; transition: opacity 0.2s; }
+      .footer-section a.text-white:hover { opacity: 1; }
+
+      /* ── PAGE VARIABLES ── */
+      :root {
+        --green: #198754; --green-dark: #146c3a; --green-light: #e8f5e9;
+        --dark: #0f1a13; --text: #2d2d2d; --muted: #6c757d; --bg: #f7f9f7;
+      }
+      body { font-family: "Montserrat", sans-serif; color: var(--text); }
+
+      /* ── LABELS & TITLES ── */
+      .sec-label { font-size: 0.72rem; font-weight: 700; color: var(--green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+      .sec-title { font-family: "Montserrat", sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: var(--dark); line-height: 1.2; letter-spacing: -0.3px; }
+
+      /* ── PAGE HEADER ── */
+      .page-header { padding: 64px 0 56px; border-bottom: 1px solid rgba(0,0,0,0.06); background: var(--bg); }
+      .page-header p { font-size: 0.97rem; color: var(--muted); line-height: 1.75; max-width: 500px; }
+      .header-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--green-light); color: var(--green); border-radius: 50px; padding: 6px 16px; font-size: 0.73rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+
+      /* ── FEATURED SERVICE ── */
+      .featured-section { padding: 72px 0 40px; }
+      .featured-card {
+        background: var(--bg); border-radius: 22px; padding: 44px 40px;
+        border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden;
+      }
+      .featured-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--green), #86efac); }
+      .featured-icon { width: 60px; height: 60px; background: var(--green-light); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--green); margin-bottom: 22px; }
+      .featured-card h3 { font-family: "Montserrat", sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--dark); margin-bottom: 12px; }
+      .featured-card > p { font-size: 0.95rem; color: var(--muted); line-height: 1.78; margin-bottom: 28px; max-width: 600px; }
+      .check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+      .check-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: var(--text); }
+      .check-item i { color: var(--green); font-size: 0.88rem; margin-top: 2px; flex-shrink: 0; }
+
+      /* ── SERVICE CARDS ── */
+      .services-grid-section { padding: 0 0 72px; }
+      .service-card {
+        background: #fff; border-radius: 18px; padding: 30px 26px; height: 100%;
+        border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden;
+        transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      }
+      .service-card::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green), #86efac); opacity: 0; transition: opacity 0.25s; }
+      .service-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,0,0,0.09); border-color: transparent; }
+      .service-card:hover::after { opacity: 1; }
+      .service-icon { width: 48px; height: 48px; background: var(--green-light); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--green); margin-bottom: 18px; }
+      .service-card h4 { font-family: "Montserrat", sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+      .service-card > p { font-size: 0.86rem; color: var(--muted); line-height: 1.72; margin-bottom: 18px; }
+      .service-card .service-divider { height: 1px; background: rgba(0,0,0,0.06); margin-bottom: 16px; }
+      .service-list { list-style: none; padding: 0; margin: 0; }
+      .service-list li { font-size: 0.83rem; color: var(--text); display: flex; align-items: flex-start; gap: 9px; margin-bottom: 8px; }
+      .service-list li i { color: var(--green); font-size: 0.82rem; margin-top: 2px; flex-shrink: 0; }
+
+      /* ── CTA ── */
+      .cta-strip { background: var(--dark); padding: 64px 0; position: relative; overflow: hidden; }
+      .cta-strip::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(25,135,84,0.2), transparent 65%); }
+      .cta-strip .container { position: relative; z-index: 1; }
+      .cta-strip h2 { font-family: "Montserrat", sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 12px; }
+      .cta-strip p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.72; }
+      .btn-cta-solid { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--dark); padding: 14px 28px; border-radius: 11px; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: all 0.2s; }
+      .btn-cta-solid:hover { background: var(--green-light); color: var(--green); }
+      .btn-cta-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(255,255,255,0.8); padding: 14px 28px; border-radius: 11px; font-weight: 700; font-size: 0.88rem; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.2); transition: all 0.2s; }
+      .btn-cta-ghost:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.06); }
+
+      /* ── ANIMATIONS ── */
+      .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+      .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 767px) {
+        .page-header { padding: 44px 0 40px; text-align: center; }
+        .page-header p { margin: 0 auto; }
+        .featured-section { padding: 48px 0 32px; }
+        .featured-card { padding: 30px 22px; }
+        .services-grid-section { padding: 0 0 48px; }
+        .cta-strip { padding: 48px 0; text-align: center; }
+        .cta-strip .d-flex { justify-content: center !important; }
+        .check-grid { grid-template-columns: 1fr; }
+      }
+    
+      /* ====== INDEX-IDENTICAL NAVBAR ====== */
+      :root { --green:#198754; --green-dark:#146c3a; --green-light:#e8f5e9; --dark:#0f1a13; }
+      .top-nav {
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        position: sticky; top: 0; left: 0; right: 0; z-index: 1050;
+        padding: 16px 0;
+      }
+      .nav-brand {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.45rem; font-weight: 800;
+        color: var(--dark); text-decoration: none; letter-spacing: -0.5px;
+      }
+      .nav-brand span { color: var(--green); }
+      .nav-link-item {
+        font-size: 0.86rem; font-weight: 600; color: #444;
+        padding: 7px 14px; border-radius: 8px; text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+      }
+      .nav-link-item:hover, .nav-link-item.active { color: var(--green); background: var(--green-light); }
+      .btn-admin {
+        font-size: 0.82rem; font-weight: 700; padding: 9px 20px;
+        border-radius: 10px; border: 1.5px solid #ccc; color: var(--dark);
+        background: transparent; text-decoration: none;
+        transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+      }
+      .btn-admin:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+      .nav-toggler {
+        background: none; border: 1.5px solid rgba(0,0,0,0.18); border-radius: 8px;
+        padding: 6px 10px; cursor: pointer; display: flex; flex-direction: column;
+        gap: 5px; align-items: center; justify-content: center; width: 42px; height: 38px;
+      }
+      .nav-toggler span { display: block; width: 20px; height: 2px; background: #1a1a1a; border-radius: 2px; transition: all 0.25s; }
+      .mobile-nav-menu {
+        display: none; flex-direction: column; gap: 4px;
+        padding: 16px 0 8px; border-top: 1px solid rgba(0,0,0,0.06); margin-top: 12px;
+      }
+      .mobile-nav-menu.open { display: flex; }
+      .mobile-nav-menu .nav-link-item { display: block; padding: 10px 14px; font-size: 0.9rem; }
+      .mobile-nav-menu .btn-admin { margin-top: 8px; justify-content: center; }
+      /* ====== END NAVBAR ====== */
+
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div class="top-nav">
+      <div class="container d-flex align-items-center justify-content-between flex-wrap">
+        <a class="nav-brand" href="index.html">House<span>Agent</span></a>
+
+        <!-- Hamburger -->
+        <button class="nav-toggler d-lg-none" id="navToggler" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+
+        <!-- Desktop links -->
+        <div class="d-none d-lg-flex align-items-center justify-content-center flex-grow-1">
+          <div class="d-flex gap-1 align-items-center">
+            <a href="index.html" class="nav-link-item">Home</a>
+            <a href="listings.html" class="nav-link-item">Listings</a>
+            <a href="services.html" class="nav-link-item active">Services</a>
+            <a href="about.html" class="nav-link-item">About</a>
+            <a href="contact.html" class="nav-link-item">Contact</a>
+          </div>
+        </div>
+        <a href="admin-login.html" class="btn-admin d-none d-lg-inline-flex">
+          <i class="bi bi-shield-lock"></i> Admin Login
+        </a>
+
+        <!-- Mobile menu -->
+        <div class="mobile-nav-menu w-100 d-lg-none" id="mobileMenu">
+          <a href="index.html" class="nav-link-item">Home</a>
+          <a href="listings.html" class="nav-link-item">Listings</a>
+          <a href="services.html" class="nav-link-item active">Services</a>
+          <a href="about.html" class="nav-link-item">About</a>
+          <a href="contact.html" class="nav-link-item">Contact</a>
+          <a href="admin-login.html" class="btn-admin"><i class="bi bi-shield-lock"></i> Admin Login</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="container">
+        <span class="header-badge"><i class="bi bi-briefcase"></i> What We Offer · Lagos, Nigeria</span>
+        <h1 class="sec-title mb-3">Real estate solutions,<br>tailored for you</h1>
+        <p>Comprehensive services for buyers, sellers, renters, and investors — from first consultation to final close.</p>
+      </div>
+    </div>
+
+    <!-- FEATURED SERVICE -->
+    <section class="featured-section">
+      <div class="container">
+        <div class="featured-card fade-up">
+          <div class="featured-icon"><i class="bi bi-house-heart"></i></div>
+          <h3>Property Buying</h3>
+          <p>Navigate the home buying process with confidence. We help you find properties that match your criteria, negotiate the best price, and handle every step of the paperwork from start to finish.</p>
+          <div class="check-grid">
+            <div class="check-item"><i class="bi bi-check-circle-fill"></i> Personalized property search based on your needs</div>
+            <div class="check-item"><i class="bi bi-check-circle-fill"></i> Expert negotiation to secure the best deal</div>
+            <div class="check-item"><i class="bi bi-check-circle-fill"></i> Comprehensive market analysis and pricing guidance</div>
+            <div class="check-item"><i class="bi bi-check-circle-fill"></i> Full support through closing and beyond</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES GRID -->
+    <section class="services-grid-section">
+      <div class="container">
+        <div class="text-center mb-5 fade-up">
+          <span class="sec-label">Everything We Do</span>
+          <h2 class="sec-title">More ways we can help</h2>
+        </div>
+        <div class="row g-4">
+
+          <div class="col-sm-6 col-lg-3 fade-up">
+            <div class="service-card">
+              <div class="service-icon"><i class="bi bi-currency-dollar"></i></div>
+              <h4>Property Selling</h4>
+              <p>Maximize your property value with proven marketing strategies and expert pricing analysis.</p>
+              <div class="service-divider"></div>
+              <ul class="service-list">
+                <li><i class="bi bi-check-circle-fill"></i> Professional property valuation</li>
+                <li><i class="bi bi-check-circle-fill"></i> Strategic marketing & staging advice</li>
+                <li><i class="bi bi-check-circle-fill"></i> Qualified buyer screening</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 fade-up" style="transition-delay:0.1s">
+            <div class="service-card">
+              <div class="service-icon"><i class="bi bi-key"></i></div>
+              <h4>Property Renting</h4>
+              <p>Find the perfect rental property or the right tenant with our comprehensive rental services.</p>
+              <div class="service-divider"></div>
+              <ul class="service-list">
+                <li><i class="bi bi-check-circle-fill"></i> Extensive rental listings</li>
+                <li><i class="bi bi-check-circle-fill"></i> Tenant screening & verification</li>
+                <li><i class="bi bi-check-circle-fill"></i> Lease agreement assistance</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 fade-up" style="transition-delay:0.2s">
+            <div class="service-card">
+              <div class="service-icon"><i class="bi bi-building-gear"></i></div>
+              <h4>Property Management</h4>
+              <p>Professional management to maintain and optimize your investment properties year-round.</p>
+              <div class="service-divider"></div>
+              <ul class="service-list">
+                <li><i class="bi bi-check-circle-fill"></i> Tenant relations & rent collection</li>
+                <li><i class="bi bi-check-circle-fill"></i> Maintenance coordination</li>
+                <li><i class="bi bi-check-circle-fill"></i> Financial reporting & analysis</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 fade-up" style="transition-delay:0.3s">
+            <div class="service-card">
+              <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
+              <h4>Investment Consultation</h4>
+              <p>Strategic guidance for building and growing your real estate investment portfolio.</p>
+              <div class="service-divider"></div>
+              <ul class="service-list">
+                <li><i class="bi bi-check-circle-fill"></i> Market trend analysis</li>
+                <li><i class="bi bi-check-circle-fill"></i> ROI projections & risk assessment</li>
+                <li><i class="bi bi-check-circle-fill"></i> Portfolio diversification strategies</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <div class="cta-strip">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7 fade-up">
+            <h2>Ready to get started?</h2>
+            <p>Whether you're buying, selling, or investing — our team is ready to guide you every step of the way.</p>
+          </div>
+          <div class="col-lg-5 d-flex gap-3 justify-content-lg-end flex-wrap fade-up" style="transition-delay:0.1s">
+            <a href="contact.html" class="btn-cta-solid"><i class="bi bi-chat"></i> Talk to an Agent</a>
+            <a href="listings.html" class="btn-cta-ghost"><i class="bi bi-search"></i> Browse Listings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-section text-white pt-5 pb-3 mt-5">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-house-door text-success me-2 fs-3"></i>
+              <span class="fw-bold h4 mb-0">HouseAgent</span>
+            </div>
+            <p class="opacity-75">
+              Your trusted partner in finding the perfect home. We provide
+              expert guidance through every step of your real estate journey.
+            </p>
+          </div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h5 class="fw-bold mb-4">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a
+                  href="index.html"
+                  class="text-white text-decoration-none opacity-75"
+                  >Home</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="listings.html"
+                  class="text-white text-decoration-none opacity-75"
+                  >Listings</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="services.html"
+                  class="text-white text-decoration-none opacity-75"
+                  >Services</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none opacity-75"
+                  >About</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none opacity-75"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Contact Info</h5>
+            <p class="opacity-75">
+              <i class="bi bi-telephone text-success me-2"></i> (555) 123-4567
+            </p>
+            <p class="opacity-75">
+              <i class="bi bi-envelope text-success me-2"></i>
+              info@houseagent.com
+            </p>
+            <p class="opacity-75">
+              <i class="bi bi-geo-alt text-success me-2"></i> 123 Real Estate
+              Ave, Suite 100, New York, NY 10001
+            </p>
+          </div>
+        </div>
+        <hr class="opacity-25" />
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center pt-3"
+        >
+          <p class="mb-0 opacity-75">© 2026 HouseAgent. All rights reserved.</p>
+          <div class="social-links mt-3 mt-md-0">
+            <a href="#" class="text-white me-3 fs-5"
+              ><i class="bi bi-facebook"></i
+            ></a>
+            <a href="#" class="text-white me-3 fs-5"
+              ><i class="bi bi-twitter-x"></i
+            ></a>
+            <a href="#" class="text-white me-3 fs-5"
+              ><i class="bi bi-instagram"></i
+            ></a>
+            <a href="#" class="text-white fs-5"
+              ><i class="bi bi-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script>
+      // Mobile nav toggle
+      const navToggler = document.getElementById("navToggler");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if (navToggler && mobileMenu) {
+        navToggler.addEventListener("click", () => {
+          mobileMenu.classList.toggle("open");
+        });
+      }
+
+      // Scroll fade-in
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

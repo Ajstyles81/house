@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listings | HouseAgent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #f4f7f6;
+      }
+
+      /* NAVBAR */
+.top-nav {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  padding: 16px 0;
+}
+
+.nav-brand {
+  font-family: "Playfair Display", serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f1a13;
+  text-decoration: none;
+}
+
+.nav-brand span { color: #198754; }
+
+.nav-link-item {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #444;
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.nav-link-item:hover,
+.nav-link-item.active {
+  color: #198754;
+  background: #e8f5e9;
+}
+
+.btn-admin {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #ccc;
+  color: #0f1a13;
+  text-decoration: none;
+}
+
+ .nav-toggler {
+        background: none; border: 1.5px solid rgba(0,0,0,0.18); border-radius: 8px;
+        padding: 6px 10px; cursor: pointer; display: flex; flex-direction: column;
+        gap: 5px; align-items: center; justify-content: center; width: 42px; height: 38px;
+      }
+      .nav-toggler span { display: block; width: 20px; height: 2px; background: #1a1a1a; border-radius: 2px; transition: all 0.25s; }
+
+      /* MOBILE NAV MENU */
+      .mobile-nav-menu {
+        display: none; flex-direction: column; gap: 4px;
+        padding: 16px 0 8px; border-top: 1px solid rgba(0,0,0,0.06); margin-top: 12px;
+      }
+      .mobile-nav-menu.open { display: flex; }
+      .mobile-nav-menu .nav-link-item { display: block; padding: 10px 14px; font-size: 0.9rem; }
+      .mobile-nav-menu .btn-admin { margin-top: 8px; justify-content: center; }
+     
+      /* ---- HERO BANNER ---- */
+      .listings-hero {
+        background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+          url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+        padding: 120px 0 60px;
+        color: white;
+        text-align: center;
+      }
+      .listings-hero h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+      .listings-hero p {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        opacity: 0.85;
+      }
+
+      /* ---- FILTER BAR ---- */
+      .filter-bar {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 24px 28px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        margin-top: -36px;
+        position: relative;
+        z-index: 10;
+      }
+      .filter-bar .form-control,
+      .filter-bar .form-select {
+        border-radius: 10px !important;
+        border: 1px solid #e0e0e0 !important;
+        padding: 11px 14px;
+        font-size: 0.88rem;
+        font-family: "Montserrat", sans-serif;
+      }
+      .filter-bar .form-control:focus,
+      .filter-bar .form-select:focus {
+        border-color: #198754 !important;
+        box-shadow: 0 0 0 0.2rem rgba(25,135,84,0.1) !important;
+      }
+      .btn-search {
+        background-color: #146c3a;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 11px 24px;
+        font-weight: 700;
+        font-size: 0.88rem;
+        font-family: "Montserrat", sans-serif;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        width: 100%;
+      }
+      .btn-search:hover { background-color: #0d4d2a; }
+
+      /* ---- RESULTS AREA ---- */
+      .results-section {
+        padding: 40px 0 60px;
+      }
+      .results-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .results-header h5 {
+        font-weight: 700;
+        font-size: 1rem;
+        margin: 0;
+      }
+      .results-count {
+        color: #6c757d;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      /* ---- PROPERTY CARD ---- */
+      .prop-card {
+        background: #ffffff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .prop-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.11);
+      }
+      .prop-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .prop-card .card-body {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .prop-type-badge {
+        display: inline-block;
+        background-color: #e8f5e9;
+        color: #198754;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .prop-title {
+        font-size: 0.97rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .prop-location {
+        font-size: 0.8rem;
+        color: #888;
+        margin-bottom: 10px;
+      }
+      .prop-price {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #198754;
+        margin-bottom: 12px;
+      }
+      .prop-meta {
+        font-size: 0.8rem;
+        color: #666;
+        display: flex;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .btn-view {
+        background-color: #146c3a;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+        margin-top: auto;
+        transition: background-color 0.2s ease;
+        font-family: "Montserrat", sans-serif;
+      }
+      .btn-view:hover {
+        background-color: #0d4d2a;
+        color: white;
+      }
+
+      /* ---- EMPTY STATE ---- */
+      .empty-listings {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 70px 20px;
+        text-align: center;
+        border: 2px dashed #dee2e6;
+      }
+      .empty-listings i {
+        font-size: 4rem;
+        color: #dee2e6;
+        display: block;
+        margin-bottom: 16px;
+      }
+      .empty-listings h5 {
+        font-weight: 700;
+        color: #555;
+        margin-bottom: 8px;
+      }
+      .empty-listings p {
+        color: #aaa;
+        font-size: 0.9rem;
+      }
+
+      /* ---- FOOTER ---- */
+      .footer-section { background-color: #020617; }
+
+      /* ---- MOBILE ---- */
+      @media (max-width: 767px) {
+        .filter-bar { padding: 20px 16px; margin-top: -20px; border-radius: 16px; }
+        .listings-hero { padding: 100px 0 50px; }
+        .prop-card img { height: 180px; }
+      }
+    </style>
+  </head>
+
+  <body>
+   <!-- NAVBAR -->
+<div class="top-nav">
+  <div class="container d-flex align-items-center justify-content-between flex-wrap">
+    <a class="nav-brand" href="index.html">House<span>Agent</span></a>
+
+    <button class="nav-toggler d-lg-none" id="navToggler">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="d-none d-lg-flex align-items-center justify-content-center flex-grow-1">
+      <div class="d-flex gap-1 align-items-center">
+        <a href="index.html" class="nav-link-item">Home</a>
+        <a href="listings.html" class="nav-link-item active">Listings</a>
+        <a href="services.html" class="nav-link-item">Services</a>
+        <a href="about.html" class="nav-link-item">About</a>
+        <a href="contact.html" class="nav-link-item">Contact</a>
+      </div>
+    </div>
+
+    <a href="admin-login.html" class="btn-admin d-none d-lg-inline-flex">
+      <i class="bi bi-shield-lock"></i> Admin Login
+    </a>
+
+    <div class="mobile-nav-menu w-100 d-lg-none" id="mobileMenu">
+      <a href="index.html" class="nav-link-item">Home</a>
+      <a href="listings.html" class="nav-link-item active">Listings</a>
+      <a href="services.html" class="nav-link-item">Services</a>
+      <a href="about.html" class="nav-link-item">About</a>
+      <a href="contact.html" class="nav-link-item">Contact</a>
+      <a href="admin-login.html" class="btn-admin"><i class="bi bi-shield-lock"></i> Admin Login</a>
+    </div>
+  </div>
+</div>
+
+    <!-- HERO BANNER -->
+    <section class="listings-hero">
+      <div class="container">
+        <h1>Browse Properties</h1>
+        <p>Discover your perfect home from our curated listings</p>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <div class="container">
+      <div class="filter-bar">
+        <div class="row g-3 align-items-end">
+          <div class="col-12 col-md-4">
+            <label class="form-label fw-bold small mb-1">Search</label>
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by title or location..." />
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label fw-bold small mb-1">Type</label>
+            <select class="form-select" id="filterType">
+              <option value="">All Types</option>
+              <option value="Villa">Villa</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Mansion">Mansion</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label fw-bold small mb-1">Bedrooms</label>
+            <select class="form-select" id="filterBeds">
+              <option value="">Any</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label fw-bold small mb-1">Max Price (₦M)</label>
+            <select class="form-select" id="filterPrice">
+              <option value="">Any</option>
+              <option value="50000000">50M</option>
+              <option value="100000000">100M</option>
+              <option value="200000000">200M</option>
+              <option value="500000000">500M</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <button class="btn-search" id="searchBtn">
+              <i class="bi bi-search me-2"></i>Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <section class="results-section">
+      <div class="container">
+        <div class="results-header">
+          <h5>Available Properties</h5>
+          <span class="results-count" id="resultsCount"></span>
+        </div>
+
+        <!-- Property cards injected here -->
+        <div class="row g-4" id="listingsGrid"></div>
+
+        <!-- Empty state -->
+        <div class="empty-listings" id="emptyListings" style="display:none;">
+          <i class="bi bi-house-x"></i>
+          <h5>No Properties Found</h5>
+          <p>Try adjusting your search filters, or check back later for new listings.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-section text-white pt-5 pb-3">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-house-door text-success me-2 fs-3"></i>
+              <span class="fw-bold h5 mb-0">HouseAgent</span>
+            </div>
+            <p class="opacity-75 small">Your trusted partner in finding the perfect home. We provide expert guidance through every step of your real estate journey.</p>
+          </div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h5 class="fw-bold mb-4">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="index.html" class="text-white text-decoration-none opacity-75">Home</a></li>
+              <li class="mb-2"><a href="listings.html" class="text-white text-decoration-none opacity-75">Listings</a></li>
+              <li class="mb-2"><a href="services.html" class="text-white text-decoration-none opacity-75">Services</a></li>
+              <li class="mb-2"><a href="about.html" class="text-white text-decoration-none opacity-75">About</a></li>
+              <li class="mb-2"><a href="contact.html" class="text-white text-decoration-none opacity-75">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Contact Info</h5>
+            <p class="opacity-75 small"><i class="bi bi-telephone text-success me-2"></i>+234 703 004 2330</p>
+            <p class="opacity-75 small"><i class="bi bi-envelope text-success me-2"></i>ajstylesjonathan@gmail.com</p>
+            <p class="opacity-75 small"><i class="bi bi-geo-alt text-success me-2"></i>Lagos, Nigeria</p>
+          </div>
+        </div>
+        <hr class="opacity-25" />
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center pt-3">
+          <p class="mb-0 opacity-75 small">&copy; 2026 AJTHREADLINE LTD. All rights reserved.</p>
+          <div class="social-links mt-3 mt-md-0">
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // ---------------------------------------------------
+      // FORMAT PRICE — turns 150000000 into ₦ 150,000,000
+      // ---------------------------------------------------
+      function formatPrice(num) {
+        return "₦ " + Number(num).toLocaleString("en-NG");
+      }
+
+      // ---------------------------------------------------
+      // GET ALL PROPERTIES FROM LOCALSTORAGE
+      // ---------------------------------------------------
+      function getProperties() {
+        const stored = localStorage.getItem("properties");
+        return stored ? JSON.parse(stored) : [];
+      }
+
+      // ---------------------------------------------------
+      // RENDER PROPERTIES — builds cards from a given array
+      // ---------------------------------------------------
+      function renderListings(properties) {
+        const grid        = document.getElementById("listingsGrid");
+        const emptyState  = document.getElementById("emptyListings");
+        const countLabel  = document.getElementById("resultsCount");
+
+        countLabel.textContent = properties.length + " " + (properties.length === 1 ? "property" : "properties") + " found";
+
+        if (properties.length === 0) {
+          grid.innerHTML = "";
+          emptyState.style.display = "block";
+          return;
+        }
+
+        emptyState.style.display = "none";
+        grid.innerHTML = "";
+
+        properties.forEach(function (property, index) {
+          // Find the real index in the full properties array for the detail page link
+          const allProperties = getProperties();
+          const realIndex = allProperties.findIndex(p => p.id === property.id);
+
+          const col = document.createElement("div");
+          col.className = "col-sm-6 col-lg-4";
+          col.innerHTML = `
+            <div class="prop-card">
+              <img src="${property.image}" alt="${property.title}" />
+              <div class="card-body">
+                <span class="prop-type-badge">${property.type}</span>
+                <div class="prop-title">${property.title}</div>
+                <div class="prop-location"><i class="bi bi-geo-alt me-1"></i>${property.location}</div>
+                <div class="prop-price">${formatPrice(property.price)}</div>
+                <div class="prop-meta">
+                  <span><i class="bi bi-door-open me-1"></i>${property.beds} Beds</span>
+                  <span><i class="bi bi-droplet me-1"></i>${property.baths} Baths</span>
+                </div>
+                <a href="property-detail.html?id=${realIndex}" class="btn-view">
+                  <i class="bi bi-eye me-2"></i>View Details
+                </a>
+              </div>
+            </div>`;
+          grid.appendChild(col);
+        });
+      }
+
+      // ---------------------------------------------------
+      // FILTER FUNCTION — runs when Search is clicked
+      // or when filters change
+      // ---------------------------------------------------
+      function applyFilters() {
+        const searchVal = document.getElementById("searchInput").value.toLowerCase().trim();
+        const typeVal   = document.getElementById("filterType").value;
+        const bedsVal   = document.getElementById("filterBeds").value;
+        const priceVal  = document.getElementById("filterPrice").value;
+
+        let properties = getProperties();
+
+        // Filter by search text (title or location)
+        if (searchVal) {
+          properties = properties.filter(function (p) {
+            return p.title.toLowerCase().includes(searchVal) ||
+                   p.location.toLowerCase().includes(searchVal);
+          });
+        }
+
+        // Filter by type
+        if (typeVal) {
+          properties = properties.filter(p => p.type === typeVal);
+        }
+
+        // Filter by minimum bedrooms
+        if (bedsVal) {
+          properties = properties.filter(p => Number(p.beds) >= Number(bedsVal));
+        }
+
+        // Filter by maximum price
+        if (priceVal) {
+          properties = properties.filter(p => Number(p.price) <= Number(priceVal));
+        }
+
+        renderListings(properties);
+      }
+
+      // ---------------------------------------------------
+      // SEARCH BUTTON CLICK
+      // ---------------------------------------------------
+      document.getElementById("searchBtn").addEventListener("click", applyFilters);
+
+      // ---------------------------------------------------
+      // ALSO FILTER IN REAL TIME AS USER TYPES
+      // ---------------------------------------------------
+      document.getElementById("searchInput").addEventListener("input", applyFilters);
+      document.getElementById("filterType").addEventListener("change", applyFilters);
+      document.getElementById("filterBeds").addEventListener("change", applyFilters);
+      document.getElementById("filterPrice").addEventListener("change", applyFilters);
+
+      // ---------------------------------------------------
+      // ON PAGE LOAD — show all properties
+      // ---------------------------------------------------
+      applyFilters();
+    </script>
+    <script>
+  const toggler = document.getElementById("navToggler");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (toggler) {
+    toggler.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+  }
+</script>
+  </body>
+</html>

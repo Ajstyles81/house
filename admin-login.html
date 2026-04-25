@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Access | HouseAgent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background-color: #f4f7f6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: "Montserrat", sans-serif;
+      }
+      .login-card {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+        width: 100%;
+        max-width: 480px;
+        padding: 48px 40px;
+        text-align: center;
+      }
+      .admin-icon-circle {
+        width: 68px;
+        height: 68px;
+        background-color: #e8f5e9;
+        color: #198754;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 24px;
+      }
+      .login-card h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .login-card p {
+        color: #6c757d;
+        margin-bottom: 32px;
+        font-size: 0.95rem;
+      }
+      .form-label {
+        text-align: left;
+        display: block;
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+        color: #444;
+      }
+      .form-control {
+        padding: 13px 16px;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        background-color: #fff;
+        font-size: 0.95rem;
+        margin-bottom: 16px;
+        width: 100%;
+      }
+      .form-control:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.1);
+        outline: none;
+      }
+      .btn-login {
+        background-color: #146c3a;
+        color: white;
+        border: none;
+        padding: 14px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      .btn-login:hover {
+        background-color: #0d4d2a;
+      }
+      .back-link {
+        text-decoration: none;
+        color: #6c757d;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-top: 28px;
+        font-weight: 500;
+      }
+      .back-link:hover {
+        color: #333;
+      }
+      /* Error message box — hidden by default */
+      .error-box {
+        display: none;
+        background-color: #fff2f2;
+        border: 1px solid #f5c6cb;
+        color: #842029;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        text-align: left;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-card">
+
+      <!-- Icon -->
+      <div class="admin-icon-circle">
+        <i class="bi bi-shield-check fs-3"></i>
+      </div>
+
+      <h2>Admin Access</h2>
+      <p>Sign in to manage your property listings</p>
+
+      <!-- Error message — shows if wrong credentials -->
+      <div class="error-box" id="errorBox">
+        <i class="bi bi-exclamation-circle me-2"></i>
+        Incorrect email or password. Please try again.
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm">
+        <label class="form-label" for="emailInput">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="emailInput"
+          placeholder="admin@houseagent.com"
+          required
+        />
+
+        <label class="form-label" for="passwordInput">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="passwordInput"
+          placeholder="Enter your password"
+          required
+        />
+
+        <button type="submit" class="btn-login">
+          <i class="bi bi-shield-lock me-2"></i>Sign In
+        </button>
+      </form>
+
+      <a href="index.html" class="back-link">
+        <i class="bi bi-arrow-left me-1"></i> Back to public site
+      </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // -------------------------------------------------------
+      // STEP 1 — ADMIN CREDENTIALS
+      // Change these two values if you ever want a new password
+      // -------------------------------------------------------
+      const ADMIN_EMAIL    = "ajstylesjonathan@gmail.com";
+      const ADMIN_PASSWORD = "00000";
+
+      // -------------------------------------------------------
+      // STEP 2 — IF ALREADY LOGGED IN, SKIP THE LOGIN PAGE
+      // This prevents a logged-in admin from seeing the login
+      // screen again if they navigate back to it
+      // -------------------------------------------------------
+      if (localStorage.getItem("adminLoggedIn") === "true") {
+        window.location.href = "admin-dashboard.html";
+      }
+
+      // -------------------------------------------------------
+      // STEP 3 — LISTEN FOR THE FORM SUBMIT
+      // -------------------------------------------------------
+      document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Stop the page from refreshing
+
+        // Grab what the user typed
+        const enteredEmail    = document.getElementById("emailInput").value.trim();
+        const enteredPassword = document.getElementById("passwordInput").value.trim();
+
+        // Compare with the correct credentials
+        if (enteredEmail === ADMIN_EMAIL && enteredPassword === ADMIN_PASSWORD) {
+
+          // ✅ CORRECT — Save login status and go to dashboard
+          localStorage.setItem("adminLoggedIn", "true");
+          window.location.href = "admin-dashboard.html";
+
+        } else {
+
+          // ❌ WRONG — Show the red error box
+          document.getElementById("errorBox").style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

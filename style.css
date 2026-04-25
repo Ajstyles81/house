@@ -1,0 +1,494 @@
+/* Import Montserrat with all necessary weights */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+/* Apply to everything */
+* {
+  font-family: "Montserrat", sans-serif !important;
+}
+body {
+  font-family: "Inter", sans-serif;
+  color: #1a1a1a;
+}
+
+/* Navbar Tweaks */
+.bg-light-green {
+  background-color: #e8f5e9;
+  color: #198754 !important;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #333 !important;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 80vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=2070")
+      no-repeat center center;
+  background-size: cover;
+}
+
+/* Cards */
+.feature-card {
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon-box {
+  background: #f0fdf4;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+/* Footer */
+.footer-section {
+  background-color: #020617; /* Very dark navy */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+  .hero-section {
+    text-align: center;
+    padding: 60px 0;
+  }
+}
+
+/* Filter Styling */
+.filter-card {
+  margin-top: -20px; /* Slight overlap for modern look */
+  z-index: 10;
+  position: relative;
+}
+
+.form-label {
+  color: #444;
+}
+
+.form-control,
+.form-select {
+  padding: 0.6rem 1rem;
+  border-color: #dee2e6;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.1);
+}
+
+/* Empty State Container (Matching the screenshot) */
+.empty-state-container {
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6 !important;
+  min-height: 400px;
+}
+
+.empty-icon-box i {
+  font-size: 5rem;
+}
+
+/* Mobile Tweaks for Listing */
+@media (max-width: 767.98px) {
+  .display-4 {
+    font-size: 2.2rem;
+  }
+  .filter-card {
+    margin-top: 0;
+  }
+  .empty-state-container {
+    min-height: 300px;
+  }
+}
+/* Smooth Page Transition Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* Optional: subtle slide up */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  animation: fadeIn 0.6s ease-out forwards;
+  background-color: #ffffff; /* Ensures a clean base during transition */
+}
+/* 1. Base state: Always clean and borderless */
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  padding: 8px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* 2. Closed State: Ensure no hover/touch color shows when the menu is shut */
+.navbar-toggler[aria-expanded="false"] {
+  background-color: transparent !important;
+}
+
+.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon {
+  filter: none !important; /* Standard icon color */
+}
+
+/* 3. Open State: The effect is ONLY visible when the menu is OPEN (aria-expanded="true") */
+.navbar-toggler[aria-expanded="true"] {
+  background-color: #e8f5e9 !important; /* Your signature light green */
+}
+
+/* 4. Icon color: Stays green as long as the menu is open */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  filter: invert(36%) sepia(54%) saturate(464%) hue-rotate(101deg)
+    brightness(91%) contrast(92%) !important;
+}
+/* 1. Global Glass Navbar Styling */
+.navbar {
+  /* Semi-transparent white background */
+  background-color: rgba(255, 255, 255, 0.7) !important;
+
+  /* The Glass Effect: Blurs content behind the navbar */
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+
+  /* Subtle border and shadow for depth */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+
+  transition: all 0.3s ease;
+}
+
+/* 2. Text Readability & Contrast */
+.navbar .nav-link,
+.navbar-brand,
+.navbar .btn {
+  /* Uses a deep black/gray to ensure contrast against blurred colors */
+  color: #1a1a1a !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.navbar .nav-link:hover {
+  color: #198754 !important; /* Your HouseAgent Green */
+}
+
+/* 3. Mobile Menu Specifics (Glass dropdown) */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    /* Makes the mobile dropdown menu glass as well */
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 4. The Toggle State (Consistent with your previous request) */
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Effect ONLY visible when the toggle menu is OPENed */
+.navbar-toggler[aria-expanded="true"] {
+  background-color: rgba(25, 135, 84, 0.1) !important; /* Soft green tint */
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  filter: invert(36%) sepia(54%) saturate(464%) hue-rotate(101deg)
+    brightness(91%) contrast(92%) !important;
+}
+/* Listing Page Filter Styles */
+.toggle-filter-btn {
+  background-color: white !important;
+  border: 2px solid #198754 !important; /* HouseAgent Green */
+  color: #000 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+}
+
+.filter-container {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+/* On mobile, filters are visible by default but can be toggled */
+@media (max-width: 767.98px) {
+  .filter-hidden {
+    display: none !important;
+  }
+}
+.toggle-filter-btn {
+  background-color: white !important;
+  border: 2px solid #198754 !important;
+  color: #000 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 767.98px) {
+  .filter-hidden {
+    display: none !important;
+  }
+}
+.toggle-filter-btn {
+  background-color: white !important;
+  /* Reduced to 1px for a sharper, premium look */
+  border: 1px solid #198754 !important;
+  color: #000 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  /* Ensure no extra shadows make the border look blurry/wide */
+  box-shadow: none !important;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+/* Subtle feedback when touched */
+.toggle-filter-btn:active {
+  background-color: #f8f9fa !important;
+  transform: scale(0.98);
+}
+/* Ensure main image stays crisp and contained */
+.main-detail-img {
+  height: 500px;
+  object-fit: cover;
+}
+
+/* Sidebar Styling */
+.glass-sidebar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Spec cards hover effect */
+.spec-card {
+  transition: transform 0.3s ease;
+}
+.spec-card:hover {
+  transform: translateY(-5px);
+  border-color: #198754 !important;
+}
+
+/* Sticky top adjustment */
+@media (max-width: 991px) {
+  .sticky-top {
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+/* --- Property Details Page Specific Styles --- */
+
+/* 1. The Space between Navbar and Content */
+.property-details-page main {
+  padding-top: 120px !important;
+}
+
+/* 2. Main Gallery Image Styling */
+.property-details-page .main-detail-img {
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* 3. The Sticky Glass Sidebar */
+.property-details-page .glass-sidebar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-radius: 20px !important;
+}
+
+/* 4. Spec Cards (Beds/Baths) */
+.property-details-page .spec-card {
+  transition: transform 0.3s ease;
+  background-color: #ffffff;
+  border: 1px solid #eee !important;
+}
+
+.property-details-page .spec-card:hover {
+  transform: translateY(-5px);
+  border-color: #198754 !important;
+}
+
+/* 5. Mobile Adjustments */
+@media (max-width: 991px) {
+  .property-details-page main {
+    padding-top: 100px !important;
+  }
+
+  .property-details-page .sticky-top {
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+/* Remove any default spacing from the top of the page */
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure the fixed navbar is exactly at the top */
+.glass-nav {
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  position: fixed !important;
+  z-index: 1030; /* Keeps it above everything else */
+}
+/* target the specific admin login button */
+.btn-outline-dark.rounded-pill:hover {
+  /* Change background to your brand green or keep it transparent */
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+  color: #ffffff !important; /* Make text white on hover */
+
+  /* Ensure no dark shadow or filter is applied */
+  filter: none !important;
+  box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2) !important;
+}
+
+/* If you want it to remain white/transparent on hover without the dark tint */
+.btn-outline-dark.rounded-pill:hover {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.05
+  ) !important; /* Very light grey tint instead of dark */
+  color: #000 !important;
+}
+/* --- Admin Dashboard Specific Styles --- */
+
+/* Scope everything to .admin-body to avoid breaking your main site */
+.admin-dashboard-body {
+  background-color: #f4f7f6 !important; /* Light grey background for contrast */
+  padding-top: 0 !important; /* Removes the large gap used for the public nav */
+  font-family: "Montserrat", sans-serif;
+}
+
+/* 1. The Table Card */
+.admin-dashboard-body .card {
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+  background: #ffffff;
+}
+
+/* 2. Table Header Styling */
+.admin-dashboard-body .table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee !important;
+  color: #6c757d;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem;
+}
+
+/* 3. Table Rows */
+.admin-dashboard-body .table tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid #f8f9fa;
+  vertical-align: middle;
+}
+
+/* 4. Dashboard Buttons */
+.admin-dashboard-body .btn-success {
+  background-color: #198754 !important;
+  border: none !important;
+  transition: all 0.3s ease;
+}
+
+.admin-dashboard-body .btn-success:hover {
+  background-color: #146c43 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2) !important;
+}
+
+/* 5. Modal (Add Property Pop-up) styling */
+.admin-dashboard-body .modal-content {
+  border: none !important;
+  border-radius: 24px !important;
+}
+
+.admin-dashboard-body .modal-header {
+  border-bottom: none !important;
+  padding: 1.5rem 1.5rem 0.5rem;
+}
+
+.admin-dashboard-body .form-control,
+.admin-dashboard-body .form-select {
+  border: 1px solid #e0e0e0 !important;
+  padding: 0.75rem;
+  border-radius: 12px !important;
+  font-size: 0.9rem;
+}
+
+.admin-dashboard-body .form-control:focus {
+  border-color: #198754 !important;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.1) !important;
+}
+/* Dashboard Specific Fixes */
+.admin-dashboard-body .form-control,
+.admin-dashboard-body .form-select {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  border: 1px solid #dee2e6 !important;
+  appearance: none;
+  border-radius: 10px !important;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.admin-dashboard-body .form-control:focus {
+  border-color: #198754 !important;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.1) !important;
+  outline: 0;
+}
+
+/* Fix for the Save button to match the 'Send Message' padding */
+.admin-dashboard-body .btn-success {
+  background-color: #198754 !important;
+  border: none !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+}

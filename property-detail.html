@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Details | HouseAgent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Replace '.your-container-class' with the actual class name of the 
+   area the button is sitting in */
+section, .container, .main-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+/* Add this to your CSS to force the header to shrink to its content */
+header, .navbar, nav {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+      /* NAVBAR */
+.top-nav {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(193, 13, 13, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  padding: 16px 0;
+}
+
+.nav-brand {
+  font-family: "Playfair Display", serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f1a13;
+  text-decoration: none;
+}
+
+.nav-brand span { color: #198754; }
+
+.nav-link-item {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #444;
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.nav-link-item:hover,
+.nav-link-item.active {
+  color: #198754;
+  background: #e8f5e9;
+}
+
+.btn-admin {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #ccc;
+  color: #0f1a13;
+  text-decoration: none;
+}
+
+.nav-toggler {
+  border: 1.5px solid rgba(0,0,0,0.18);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nav-toggler {
+    border: 1px solid #ddd; /* Change from red to a light grey */
+    border-radius: 8px;
+    padding: 10px;          /* Adjust padding to make it square-ish */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;               /* Slightly tighter gap between lines */
+    align-items: center;    /* Center the spans horizontally */
+    cursor: pointer;        /* Add this so users know it's clickable */
+    background: transparent;
+}
+
+/* Update these lines in your .nav-toggler span block */
+.nav-toggler span {
+    width: 22px;            /* Slightly wider to match the reference */
+    height: 2px;
+    background: #333;       /* Or #000 for pure black */
+    border-radius: 2px;     /* Rounds the edges of the individual lines */
+}
+
+/* Find this block in your code and edit the padding line */
+.mobile-nav-menu {
+    display: none;
+    flex-direction: column;
+    padding: 16px 0 0 0; /* Changed from '16px 0' to remove bottom padding */
+}
+
+.mobile-nav-menu.open {
+  display: flex;
+}
+      /* ── CAROUSEL ─────────────────────────────────────────────── */
+      .gallery-wrap {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        margin-bottom: 12px;
+        background: #000;
+        position: relative;
+      }
+      .gallery-wrap .carousel-inner img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        display: block;
+        cursor: pointer;       /* tells user they can click */
+      }
+      /* Carousel arrows */
+      .gallery-wrap .carousel-control-prev,
+      .gallery-wrap .carousel-control-next {
+        width: 44px; height: 44px;
+        background: rgba(0,0,0,0.45);
+        border-radius: 50%;
+        top: 50%; transform: translateY(-50%);
+        bottom: auto;
+      }
+      .gallery-wrap .carousel-control-prev { left: 12px; }
+      .gallery-wrap .carousel-control-next { right: 12px; }
+      .gallery-wrap .carousel-control-prev-icon,
+      .gallery-wrap .carousel-control-next-icon { width: 18px; height: 18px; }
+
+      /* Slide counter badge */
+      .slide-counter {
+        position: absolute; bottom: 12px; right: 14px;
+        background: rgba(0,0,0,0.55); color: white;
+        font-size: 0.75rem; font-weight: 700;
+        padding: 4px 10px; border-radius: 20px;
+        pointer-events: none; z-index: 10;
+      }
+
+      /* Click-to-expand hint */
+      .expand-hint {
+        position: absolute; bottom: 12px; left: 14px;
+        background: rgba(0,0,0,0.5); color: white;
+        font-size: 0.72rem; font-weight: 600;
+        padding: 4px 10px; border-radius: 20px;
+        pointer-events: none; z-index: 10;
+        display: flex; align-items: center; gap: 5px;
+      }
+
+      /* Thumbnail strip below carousel */
+      .thumb-strip {
+        display: flex; gap: 8px; overflow-x: auto;
+        padding-bottom: 4px; margin-bottom: 28px;
+        scrollbar-width: none;
+      }
+      .thumb-strip::-webkit-scrollbar { display: none; }
+      .thumb-strip img {
+        width: 72px; height: 54px; object-fit: cover;
+        border-radius: 8px; cursor: pointer; flex-shrink: 0;
+        border: 2px solid transparent;
+        transition: border-color 0.2s ease, opacity 0.2s ease;
+        opacity: 0.65;
+      }
+      .thumb-strip img.active-thumb { border-color: #198754; opacity: 1; }
+
+      /* ── LIGHTBOX ─────────────────────────────────────────────── */
+      #lightbox {
+        display: none;
+        position: fixed; inset: 0; z-index: 9999;
+        background: rgba(0,0,0,0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        touch-action: pan-y;        /* allow vertical scroll but intercept horizontal */
+      }
+      #lightbox.open { display: flex; }
+
+      /* Close button */
+      .lb-close {
+        position: absolute; top: 16px; right: 18px;
+        background: rgba(255,255,255,0.15); color: white;
+        border: none; border-radius: 50%;
+        width: 42px; height: 42px; font-size: 1.2rem;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s; z-index: 10;
+      }
+      .lb-close:hover { background: rgba(255,255,255,0.3); }
+
+      /* Lightbox image */
+      .lb-img-wrap {
+        width: 100%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+        padding: 60px 70px;
+      }
+      #lbImage {
+        max-width: 100%; max-height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        user-select: none;
+        transition: opacity 0.2s ease;
+      }
+
+      /* Nav arrows */
+      .lb-arrow {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        background: rgba(255,255,255,0.12); color: white;
+        border: none; border-radius: 50%;
+        width: 48px; height: 48px; font-size: 1.3rem;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s; z-index: 10;
+      }
+      .lb-arrow:hover { background: rgba(255,255,255,0.28); }
+      .lb-prev { left: 14px; }
+      .lb-next { right: 14px; }
+
+      /* Counter */
+      .lb-counter {
+        position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+        color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 600;
+        background: rgba(0,0,0,0.4); padding: 5px 14px; border-radius: 20px;
+      }
+
+      /* Dot indicators */
+      .lb-dots {
+        position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+        display: flex; gap: 6px;
+      }
+      .lb-dot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: rgba(255,255,255,0.35); cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .lb-dot.active { background: #fff; transform: scale(1.3); }
+
+      /* ── PROPERTY CONTENT ──────────────────────────────────────── */
+      .prop-type-badge {
+        display: inline-block; background-color: #e8f5e9; color: #198754;
+        font-size: 0.75rem; font-weight: 700; padding: 4px 12px;
+        border-radius: 20px; text-transform: uppercase;
+        letter-spacing: 0.5px; margin-bottom: 10px;
+      }
+      .detail-title { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+      .detail-location { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+
+      .spec-grid { margin-bottom: 32px; }
+      .spec-item {
+        background: #fff; border-radius: 14px; padding: 18px 12px;
+        text-align: center; border: 1px solid #eee;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .spec-item:hover { transform: translateY(-4px); border-color: #198754; }
+      .spec-item i { font-size: 1.6rem; color: #198754; display: block; margin-bottom: 6px; }
+      .spec-item .spec-label { font-size: 0.72rem; color: #aaa; margin-bottom: 2px; }
+      .spec-item .spec-value { font-size: 0.9rem; font-weight: 700; color: #1a1a1a; }
+
+      .detail-description {
+        background: #fff; border-radius: 16px; padding: 28px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 24px;
+      }
+      .detail-description h4 { font-weight: 700; font-size: 1rem; margin-bottom: 14px; }
+      .detail-description p { color: #666; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+
+      /* ── SIDEBAR ───────────────────────────────────────────────── */
+      .sidebar-card {
+        background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+        border-radius: 20px; padding: 28px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.04);
+      }
+      .sidebar-price { font-size: clamp(1.4rem,3vw,1.8rem); font-weight: 800; color: #198754; margin-bottom: 4px; }
+      .agent-avatar {
+        width: 50px; height: 50px; background-color: #1a1a1a; color: white;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 0.9rem; flex-shrink: 0;
+      }
+      .sidebar-card .form-control,
+      .sidebar-card textarea {
+        border-radius: 10px !important; border: 1px solid #e0e0e0 !important;
+        padding: 11px 14px; font-size: 0.88rem;
+        font-family: "Montserrat", sans-serif; margin-bottom: 12px;
+        background-color: #fafafa; width: 100%; display: block;
+      }
+      .sidebar-card .form-control:focus,
+      .sidebar-card textarea:focus {
+        border-color: #198754 !important;
+        box-shadow: 0 0 0 0.2rem rgba(25,135,84,0.1) !important;
+        background-color: #fff !important; outline: none;
+      }
+      .btn-send {
+        background-color: #146c3a; color: white; border: none;
+        border-radius: 10px; padding: 13px; font-weight: 700; font-size: 0.9rem;
+        width: 100%; cursor: pointer; font-family: "Montserrat", sans-serif;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;
+      }
+      .btn-send:hover { background-color: #0d4d2a; transform: translateY(-1px); }
+      .btn-send:disabled { background-color: #aaa; cursor: not-allowed; transform: none; }
+      .btn-whatsapp {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        background-color: #25D366; color: white; border: none; border-radius: 10px;
+        padding: 12px; font-weight: 700; font-size: 0.9rem; width: 100%;
+        text-decoration: none; font-family: "Montserrat", sans-serif;
+        transition: background-color 0.2s ease, transform 0.2s ease; margin-bottom: 10px;
+      }
+      .btn-whatsapp:hover { background-color: #1ebe5d; color: white; transform: translateY(-1px); }
+      .btn-call {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        border: 1.5px solid #1a1a1a; border-radius: 10px; padding: 11px;
+        font-weight: 700; font-size: 0.88rem; color: #1a1a1a;
+        text-decoration: none; font-family: "Montserrat", sans-serif; transition: all 0.2s ease;
+      }
+      .btn-call:hover { background-color: #1a1a1a; color: white; }
+
+      .sidebar-success {
+        display: none; background-color: #d1fae5; border: 1px solid #6ee7b7;
+        color: #065f46; border-radius: 10px; padding: 11px 14px;
+        font-size: 0.82rem; font-weight: 600; margin-bottom: 14px;
+      }
+      .sidebar-error {
+        display: none; background-color: #fff2f2; border: 1px solid #f5c6cb;
+        color: #842029; border-radius: 10px; padding: 11px 14px;
+        font-size: 0.82rem; font-weight: 600; margin-bottom: 14px;
+      }
+
+      .not-found { text-align: center; padding: 80px 20px; }
+      .not-found i { font-size: 4rem; color: #dee2e6; display: block; margin-bottom: 20px; }
+      .not-found h4 { font-weight: 700; color: #555; }
+
+      .btn-back {
+    display: inline-flex;
+    /* ... existing code ... */
+    margin-top: -20px; /* Add this */
+}
+      .btn-back {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: #fff; border: 1.5px solid #e0e0e0; border-radius: 10px;
+        padding: 9px 18px; font-size: 0.85rem; font-weight: 600; color: #333;
+        text-decoration: none; margin-bottom: 24px; transition: all 0.2s ease;
+        font-family: "Montserrat", sans-serif;
+      }
+      .btn-back:hover { border-color: #198754; color: #198754; }
+
+      .footer-section { background-color: #020617; }
+
+      /* ── MOBILE ────────────────────────────────────────────────── */
+      @media (max-width: 767px) {
+        main { padding-top: 80px; }
+        .gallery-wrap .carousel-inner img { height: 240px; }
+        .lb-img-wrap { padding: 56px 16px 70px; }
+        .lb-arrow { width: 38px; height: 38px; font-size: 1.1rem; }
+        .lb-prev { left: 6px; }
+        .lb-next { right: 6px; }
+        .sidebar-card { margin-top: 12px; }
+        .thumb-strip img { width: 58px; height: 44px; }
+      }
+      @media (max-width: 991px) {
+        .sticky-top { position: relative !important; top: 0 !important; }
+      }
+    </style>
+  </head>
+
+  <body class="property-details-page">
+
+   <!-- NAVBAR -->
+    <div class="top-nav">
+      <div class="container d-flex align-items-center justify-content-between flex-wrap">
+        <a class="nav-brand" href="index.html">House<span>Agent</span></a>
+
+        <!-- Custom visible hamburger for mobile -->
+        <button class="nav-toggler d-lg-none" id="navToggler" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+
+        <!-- Desktop nav links -->
+        <div class="d-none d-lg-flex align-items-center justify-content-center flex-grow-1">
+          <div class="d-flex gap-1 align-items-center">
+            <a href="index.html" class="nav-link-item">Home</a>
+            <a href="listings.html" class="nav-link-item active">Listings</a>
+            <a href="services.html" class="nav-link-item">Services</a>
+            <a href="about.html" class="nav-link-item">About</a>
+            <a href="contact.html" class="nav-link-item">Contact</a>
+          </div>
+        </div>
+        <a href="admin-login.html" class="btn-admin d-none d-lg-inline-flex">
+          <i class="bi bi-shield-lock"></i> Admin Login
+        </a>
+
+        <!-- Mobile dropdown menu -->
+        <div class="mobile-nav-menu w-100 d-lg-none" id="mobileMenu">
+          <a href="index.html" class="nav-link-item">Home</a>
+          <a href="listings.html" class="nav-link-item active">Listings</a>
+          <a href="services.html" class="nav-link-item">Services</a>
+          <a href="about.html" class="nav-link-item">About</a>
+          <a href="contact.html" class="nav-link-item">Contact</a>
+          <a href="admin-login.html" class="btn-admin"><i class="bi bi-shield-lock"></i> Admin Login</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- MAIN -->
+    <main>
+      <div class="container py-4" id="pageContent"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-section text-white pt-5 pb-3 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold mb-3">House<span class="text-success">Agent</span></h5>
+            <p class="text-muted small">Your trusted partner in finding the perfect home across Nigeria.</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h6 class="fw-bold mb-3">Quick Links</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="index.html" class="text-decoration-none text-muted small">Home</a></li>
+              <li class="mb-2"><a href="listings.html" class="text-decoration-none text-muted small">Browse Properties</a></li>
+              <li class="mb-2"><a href="services.html" class="text-decoration-none text-muted small">Services</a></li>
+              <li class="mb-2"><a href="contact.html" class="text-decoration-none text-muted small">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h6 class="fw-bold mb-3">Follow Us</h6>
+            <div class="d-flex gap-3 fs-5 mb-3">
+              <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <a href="https://wa.me/2347030042330" target="_blank" class="text-decoration-none text-muted small">
+              <i class="bi bi-whatsapp text-success me-2"></i>+234 703 004 2330
+            </a>
+          </div>
+        </div>
+        <hr class="opacity-25" />
+        <p class="text-center text-muted small mb-0">&copy; 2026 AJTHREADLINE LTD. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+      // ── EMAILJS CONFIG ────────────────────────────────────────────
+      const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+      const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+      const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+
+      const WHATSAPP_NUMBER = "2347030042330";
+
+      // ── LOAD PROPERTY ─────────────────────────────────────────────
+      const urlParams   = new URLSearchParams(window.location.search);
+      const propIndex   = urlParams.get("id");
+      const pageContent = document.getElementById("pageContent");
+      const stored      = localStorage.getItem("properties");
+      const properties  = stored ? JSON.parse(stored) : [];
+      const property    = (propIndex !== null && properties[propIndex]) ? properties[propIndex] : null;
+
+      function formatPrice(num) { return "₦ " + Number(num).toLocaleString("en-NG"); }
+
+      // Build images array — supports old single-image and new multi-image format
+      const images = property
+        ? (Array.isArray(property.images) && property.images.length > 0
+            ? property.images
+            : [property.image])
+        : [];
+
+      // ── RENDER PAGE ───────────────────────────────────────────────
+      if (!property) {
+        pageContent.innerHTML = `
+          <div class="not-found">
+            <i class="bi bi-house-x"></i>
+            <h4>Property Not Found</h4>
+            <p class="text-muted mb-4">This listing may have been removed or the link is invalid.</p>
+            <a href="listings.html" class="btn btn-success rounded-pill px-4">
+              <i class="bi bi-arrow-left me-2"></i>Back to Listings
+            </a>
+          </div>`;
+      } else {
+        document.title = property.title + " | HouseAgent";
+
+        const waMessage = encodeURIComponent(
+          "Hello, I am interested in this property:\n\n" +
+          "📍 " + property.title + "\n" +
+          "📌 Location: " + property.location + "\n" +
+          "💰 Price: " + formatPrice(property.price) + "\n\n" +
+          "Please provide more details."
+        );
+
+        // Build carousel slides HTML
+        const slidesHTML = images.map((src, i) => `
+          <div class="carousel-item ${i === 0 ? "active" : ""}">
+            <img src="${src}" alt="${property.title} — photo ${i + 1}"
+              onclick="openLightbox(${i})" />
+          </div>`).join("");
+
+        // Build thumbnail strip HTML
+        const thumbsHTML = images.map((src, i) => `
+          <img src="${src}" alt="Thumb ${i + 1}"
+            class="${i === 0 ? "active-thumb" : ""}"
+            onclick="goToSlide(${i})"
+            id="thumb-${i}" />`).join("");
+
+        // Only show arrows if more than 1 image
+        const arrowsHTML = images.length > 1 ? `
+          <button class="carousel-control-prev" type="button" data-bs-target="#propCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#propCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>` : "";
+
+        pageContent.innerHTML = `
+          <a href="listings.html" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Back to Listings
+          </a>
+
+          <div class="row g-4">
+
+            <!-- LEFT COLUMN -->
+            <div class="col-lg-8">
+
+              <!-- IMAGE CAROUSEL -->
+              <div class="gallery-wrap">
+                <div id="propCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                  <div class="carousel-inner">${slidesHTML}</div>
+                  ${arrowsHTML}
+                </div>
+                <div class="expand-hint"><i class="bi bi-arrows-fullscreen"></i> Tap to expand</div>
+                <div class="slide-counter" id="slideCounter">1 / ${images.length}</div>
+              </div>
+
+              <!-- THUMBNAIL STRIP -->
+              ${images.length > 1 ? `<div class="thumb-strip" id="thumbStrip">${thumbsHTML}</div>` : ""}
+
+              <!-- TITLE & LOCATION -->
+              <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+                <div>
+                  <span class="prop-type-badge">${property.type}</span>
+                  <h1 class="detail-title">${property.title}</h1>
+                  <p class="detail-location">
+                    <i class="bi bi-geo-alt-fill text-success me-1"></i>${property.location}
+                  </p>
+                </div>
+                <div class="d-flex gap-2 pt-2">
+                  <button class="btn btn-light rounded-circle shadow-sm" title="Share"><i class="bi bi-share"></i></button>
+                  <button class="btn btn-light rounded-circle shadow-sm text-danger" title="Save"><i class="bi bi-heart"></i></button>
+                </div>
+              </div>
+
+              <!-- SPECS -->
+              <div class="row g-3 spec-grid">
+                <div class="col-6 col-md-3">
+                  <div class="spec-item">
+                    <i class="bi bi-door-open"></i>
+                    <div class="spec-label">Bedrooms</div>
+                    <div class="spec-value">${property.beds} Beds</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="spec-item">
+                    <i class="bi bi-droplet"></i>
+                    <div class="spec-label">Bathrooms</div>
+                    <div class="spec-value">${property.baths} Baths</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="spec-item">
+                    <i class="bi bi-tag"></i>
+                    <div class="spec-label">Type</div>
+                    <div class="spec-value">${property.type}</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="spec-item">
+                    <i class="bi bi-cash-stack"></i>
+                    <div class="spec-label">Price</div>
+                    <div class="spec-value" style="font-size:0.78rem;">${formatPrice(property.price)}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DESCRIPTION -->
+              <div class="detail-description">
+                <h4><i class="bi bi-card-text text-success me-2"></i>Description</h4>
+                <p>${property.description}</p>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN — SIDEBAR -->
+            <div class="col-lg-4">
+              <div class="sticky-top" style="top: 100px;">
+                <div class="sidebar-card">
+
+                  <div class="text-center mb-3">
+                    <div class="sidebar-price">${formatPrice(property.price)}</div>
+                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill">For Sale</span>
+                  </div>
+
+                  <hr class="my-3" />
+
+                  <div class="d-flex align-items-center mb-4">
+                    <div class="agent-avatar">AJ</div>
+                    <div class="ms-3">
+                      <h6 class="mb-0 fw-bold" style="font-size:0.9rem;">Amos Jonathan</h6>
+                      <small class="text-muted">Listing Agent</small>
+                    </div>
+                  </div>
+
+                  <div class="sidebar-success" id="sidebarSuccess">
+                    <i class="bi bi-check-circle me-2"></i>Message sent! We'll contact you shortly.
+                  </div>
+                  <div class="sidebar-error" id="sidebarError">
+                    <i class="bi bi-exclamation-circle me-2"></i>Failed to send. Try WhatsApp below.
+                  </div>
+
+                  <input type="text"  class="form-control" id="senderName"    placeholder="Your Full Name" />
+                  <input type="email" class="form-control" id="senderEmail"   placeholder="Your Email Address" />
+                  <input type="tel"   class="form-control" id="senderPhone"   placeholder="Your Phone Number" />
+                  <textarea class="form-control" id="senderMessage" rows="3"
+                    placeholder="I am interested in this property..."></textarea>
+
+                  <button class="btn-send" id="sendBtn" onclick="sendMessage()">
+                    <i class="bi bi-send"></i><span id="sendBtnText">Send Message</span>
+                  </button>
+
+                  <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}" target="_blank" class="btn-whatsapp">
+                    <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+                  </a>
+
+                  <a href="tel:+2347030042330" class="btn-call">
+                    <i class="bi bi-telephone"></i> Call Agent
+                  </a>
+
+                </div>
+              </div>
+            </div>
+
+          </div>`;
+
+        // ── INIT CAROUSEL EVENTS ────────────────────────────────────
+        // After HTML is injected, wire up the carousel slide event
+        // to keep thumbnail strip and counter in sync
+        const carouselEl = document.getElementById("propCarousel");
+        if (carouselEl) {
+          carouselEl.addEventListener("slid.bs.carousel", function (e) {
+            const idx = e.to;
+            // Update counter
+            document.getElementById("slideCounter").textContent = (idx + 1) + " / " + images.length;
+            // Update active thumbnail
+            document.querySelectorAll(".thumb-strip img").forEach((t, i) => {
+              t.classList.toggle("active-thumb", i === idx);
+            });
+          });
+        }
+      }
+
+      // ── THUMBNAIL CLICK ───────────────────────────────────────────
+      // Jump the Bootstrap carousel to the clicked thumbnail index
+      function goToSlide(index) {
+        const carouselEl = document.getElementById("propCarousel");
+        if (!carouselEl) return;
+        const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
+        carousel.to(index);
+      }
+
+      // ── LIGHTBOX ──────────────────────────────────────────────────
+      let lbIndex = 0;
+      const lightbox  = document.getElementById("lightbox");
+      const lbImage   = document.getElementById("lbImage");
+      const lbCounter = document.getElementById("lbCounter");
+      const lbDots    = document.getElementById("lbDots");
+
+      function openLightbox(index) {
+        lbIndex = index;
+        buildDots();
+        showLbImage();
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden"; // prevent background scroll
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      function showLbImage() {
+        lbImage.style.opacity = "0";
+        setTimeout(() => {
+          lbImage.src = images[lbIndex];
+          lbImage.style.opacity = "1";
+        }, 120);
+        lbCounter.textContent = (lbIndex + 1) + " / " + images.length;
+        // Update dots
+        document.querySelectorAll(".lb-dot").forEach((d, i) => {
+          d.classList.toggle("active", i === lbIndex);
+        });
+      }
+
+      function lbPrev() {
+        lbIndex = (lbIndex - 1 + images.length) % images.length;
+        showLbImage();
+      }
+
+      function lbNext() {
+        lbIndex = (lbIndex + 1) % images.length;
+        showLbImage();
+      }
+
+      function buildDots() {
+        lbDots.innerHTML = "";
+        // Only show dots if 8 or fewer images (otherwise gets cluttered)
+        if (images.length <= 8) {
+          images.forEach((_, i) => {
+            const dot = document.createElement("div");
+            dot.className = "lb-dot" + (i === lbIndex ? " active" : "");
+            dot.onclick = () => { lbIndex = i; showLbImage(); };
+            lbDots.appendChild(dot);
+          });
+        }
+      }
+
+      // Lightbox button listeners
+      document.getElementById("lbClose").addEventListener("click", closeLightbox);
+      document.getElementById("lbPrev").addEventListener("click", lbPrev);
+      document.getElementById("lbNext").addEventListener("click", lbNext);
+
+      // Close on background click (not on image)
+      lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox || e.target.classList.contains("lb-img-wrap")) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "ArrowLeft")  lbPrev();
+        if (e.key === "ArrowRight") lbNext();
+        if (e.key === "Escape")     closeLightbox();
+      });
+
+      // ── TOUCH SWIPE on lightbox ───────────────────────────────────
+      // Records where the finger started and calculates swipe direction
+      let touchStartX = 0;
+      lightbox.addEventListener("touchstart", e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      lightbox.addEventListener("touchend", e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {      // minimum 50px swipe
+          diff > 0 ? lbNext() : lbPrev();
+        }
+      }, { passive: true });
+
+      // ── EMAIL SEND ────────────────────────────────────────────────
+      function sendMessage() {
+        if (!property) return;
+        const nameEl    = document.getElementById("senderName");
+        const emailEl   = document.getElementById("senderEmail");
+        const phoneEl   = document.getElementById("senderPhone");
+        const msgEl     = document.getElementById("senderMessage");
+        const sendBtn   = document.getElementById("sendBtn");
+        const btnText   = document.getElementById("sendBtnText");
+        const successEl = document.getElementById("sidebarSuccess");
+        const errorEl   = document.getElementById("sidebarError");
+
+        if (!nameEl.value.trim() || !emailEl.value.trim() || !msgEl.value.trim()) {
+          errorEl.innerHTML = '<i class="bi bi-exclamation-circle me-2"></i>Please fill in your name, email and message.';
+          errorEl.style.display   = "block";
+          successEl.style.display = "none";
+          return;
+        }
+
+        successEl.style.display = "none";
+        errorEl.style.display   = "none";
+        sendBtn.disabled        = true;
+        btnText.textContent     = "Sending...";
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          from_name     : nameEl.value.trim(),
+          from_email    : emailEl.value.trim(),
+          from_phone    : phoneEl.value.trim() || "Not provided",
+          subject       : "Property Inquiry — " + property.title,
+          message       : msgEl.value.trim(),
+          property_name : property.title,
+          property_loc  : property.location,
+          property_price: formatPrice(property.price),
+          to_email      : "ajstylesjonathan@gmail.com"
+        })
+        .then(() => {
+          successEl.style.display = "block";
+          nameEl.value = emailEl.value = phoneEl.value = msgEl.value = "";
+        })
+        .catch(err => {
+          console.error(err);
+          errorEl.innerHTML = '<i class="bi bi-exclamation-circle me-2"></i>Failed to send. Try WhatsApp below.';
+          errorEl.style.display = "block";
+        })
+        .finally(() => {
+          sendBtn.disabled    = false;
+          btnText.textContent = "Send Message";
+        });
+      }
+    </script>
+ <script>
+  const toggler = document.getElementById("navToggler");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (toggler) {
+    toggler.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+  }
+</script>
+  </body>
+</html>
